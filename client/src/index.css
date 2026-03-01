@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-slate-700/40;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #e2e8f0;
+    background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 35%, #312e81 60%, #1e1b4b 85%, #0f172a 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 15% 15%, rgba(139, 92, 246, 0.1) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 85%, rgba(124, 58, 237, 0.06) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none;
+    box-shadow: 0 0 0 2px rgb(139 92 246), 0 0 14px rgba(139, 92, 246, 0.35);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.35s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.35s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  .preview-page-root {
+    padding: 0 !important;
+    display: block !important;
+    justify-content: unset !important;
+  }
+
+  .cv-preview-print-wrapper {
+    padding: 0 !important;
+    display: block !important;
+    background: transparent !important;
+  }
+
+  .cv-preview-print {
+    box-shadow: none !important;
+    background: white !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+}
