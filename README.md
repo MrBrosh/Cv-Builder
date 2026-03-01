@@ -2,7 +2,8 @@
 
 **Full-Stack project**: a web app for building professional resumes, with server-side saving, live Preview, and AI-powered text improvement (Google Gemini or OpenAI – you can enter an OpenAI key in the Admin page).
 
-**For the lecturer:** Clone the repo, run `npm run install:all`, create `server/.env` from `server/.env.example`, add a `GEMINI_API_KEY`, then `npm run dev` from the project root. Open http://localhost:5173 and log in with `admin@cvbuilder.local` / `Admin123!`.
+**For the lecturer:** Clone the repo, run `npm run install:all`, create `server/.env` from `server/.env.example`, add a `GEMINI_API_KEY`, then `npm run dev` from the project root. Open **http://localhost:5173** and log in with `admin@cvbuilder.local` / `Admin123!`.  
+**To enter your OpenAI API key:** add **`/editor/admin`** to the local address — open **http://localhost:5173/editor/admin** in the browser. There you can paste your OpenAI key (from https://platform.openai.com/api-keys) and save it; the app will then use OpenAI for AI text improvement.
 
 ---
 
@@ -256,7 +257,7 @@ On server startup a default **admin user** is created so you can share credentia
 | **Name** | Admin (lecturer) |
 
 - Log in at `/login` (e.g. http://localhost:5173/login when running locally) with the email and password above.
-- After login, go to **Admin** (or `/editor/admin`) to enter an OpenAI API key.
+- **To open the Admin page and enter your OpenAI key:** add **`/editor/admin`** to the local address — i.e. open **http://localhost:5173/editor/admin** in the browser. There you can paste your OpenAI API key and save it.
 - To change admin credentials: set `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and/or `ADMIN_NAME` in the server `.env` (the user is created on next server start with the new values).
 
 ---
@@ -328,7 +329,7 @@ On server startup a default **admin user** is created so you can share credentia
 
 On the **Admin** page you can enter an **OpenAI** API key so the app uses OpenAI (model `gpt-4o-mini`) to improve the professional summary and experience descriptions.
 
-- **Path:** `/editor/admin` (e.g. http://localhost:5173/editor/admin when running locally)
+- **Path:** `/editor/admin`. **For the lecturer:** add the word **admin** to the local link — open **http://localhost:5173/editor/admin** in the browser; there you can enter your OpenAI API key.
 - **Access:** Logged-in users only (same “Admin” link in the top nav or bottom nav on mobile).
 - **Usage:** Enter your OpenAI key (starts with `sk-...`) and click “Save key”. The key is stored **in server memory** for the current run – after a server restart you must enter it again (or set `OPENAI_API_KEY` in `.env` for a persistent key).
 - **Priority:** If a key is set in Admin, the server uses OpenAI; otherwise it uses Gemini (`GEMINI_API_KEY` in `.env`).
