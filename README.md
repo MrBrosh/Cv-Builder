@@ -136,20 +136,21 @@ This installs dependencies in the root (including `concurrently`), in `client`, 
    ```bash
    npm install
    ```
-3. Create a `.env` file from the template:
-   - **Windows (PowerShell):**
+3. Create a `.env` file **in the `server` folder** from the template:
+   - **Windows (PowerShell)** (run from project root or from `server`):
      ```powershell
-     Copy-Item .env.example .env
+     Copy-Item server\.env.example server\.env
      ```
+     Or from inside `server`: `Copy-Item .env.example .env`
    - **Windows (CMD):**
      ```cmd
-     copy .env.example .env
+     copy server\.env.example server\.env
      ```
    - **Mac / Linux:**
      ```bash
-     cp .env.example .env
+     cp server/.env.example server/.env
      ```
-4. Edit `.env` and add your Gemini API key – see below for how to get it.
+4. Edit **`server/.env`** and set `GEMINI_API_KEY` to your key (see [How to get the API key](#how-to-get-the-api-key-gemini_api_key) below).
 
 ---
 
@@ -216,10 +217,11 @@ If everything is working:
 
 The `.env` file lives **only** in the `server` folder (not in `client`).
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google AI Studio API key for text improvement (summary, experience) |
-| `PORT` | No | Server port (default: 3000) |
+| Where | Variable | Required | Description |
+|-------|----------|----------|-------------|
+| `server/.env` | `GEMINI_API_KEY` | Yes (for AI) | Google AI Studio key – used for text improvement if no OpenAI key is set in Admin |
+| `server/.env` | `PORT` | No | Server port (default: 3000) |
+| Admin page | OpenAI key | No | Optional – enter at http://localhost:5173/editor/admin; stored in server memory until restart |
 
 ### How to get the API key (GEMINI_API_KEY)
 
@@ -331,8 +333,8 @@ On the **Admin** page you can enter an **OpenAI** API key so the app uses OpenAI
 
 - **Path:** `/editor/admin`. **For the lecturer:** add the word **admin** to the local link — open **http://localhost:5173/editor/admin** in the browser; there you can enter your OpenAI API key.
 - **Access:** Logged-in users only (same “Admin” link in the top nav or bottom nav on mobile).
-- **Usage:** Enter your OpenAI key (starts with `sk-...`) and click “Save key”. The key is stored **in server memory** for the current run – after a server restart you must enter it again (or set `OPENAI_API_KEY` in `.env` for a persistent key).
-- **Priority:** If a key is set in Admin, the server uses OpenAI; otherwise it uses Gemini (`GEMINI_API_KEY` in `.env`).
+- **Usage:** Enter your OpenAI key (starts with `sk-...`) and click “Save key”. The key is stored **in server memory** for the current run; after a server restart you must enter it again from the Admin page.
+- **Priority:** If a key is set in Admin, the server uses OpenAI; otherwise it uses Gemini (`GEMINI_API_KEY` in `server/.env`).
 
 **Where to get an OpenAI key:** [OpenAI API Keys](https://platform.openai.com/api-keys) (OpenAI account required).
 
@@ -362,7 +364,7 @@ When running locally, base URL is `http://localhost:3000`. The client is configu
 - **Restart the server:** Stop the process (Ctrl+C) and run `npm run dev` again so the latest server code is used.
 - The server accepts any JSON body for save; if you still see 400, check the browser Network tab for the exact response body.
 
-1. Ensure `GEMINI_API_KEY` is set in `.env`
+1. Ensure `GEMINI_API_KEY` is set in `server/.env`
 2. Check that port 3000 is free
 3. Run `npm install` in `server` again
 
